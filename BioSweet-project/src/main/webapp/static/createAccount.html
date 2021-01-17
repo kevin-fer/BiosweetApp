@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<a href="index.html">Menu</a>
+
+<h1>Add a account</h1>
+
+<form>
+  Mail: <input id="emailId" type="text" name="email" value="test@biosweet.com"><br>
+  Mot de passe: <input id="passwordId" type="text" name="password" value="Test1234"><br>
+  Matricule (si salarié): <input id="matriculeId" type="text" name="matricule" value="78945"><br><br>
+  <input type="button" value="Submit" onclick="sendAccount()">
+</form> 
+
+<script>
+function sendAccount() {
+    var text = '{"';
+    text += 'adressMail":"' + document.getElementById("emailId").value + '",'
+    text += '"password":"' + document.getElementById("passwordId").value + '",'
+    text += '"matricule":"' + document.getElementById("matriculeId").value + '"}'
+    
+    var account = JSON.parse(text);
+    
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.open('POST', "http://localhost:8080/comptes", true);
+    httpRequest.setRequestHeader("Content-type", "application/json");
+    httpRequest.send(JSON.stringify(account));
+    
+}
+</script>
+
+
+
+</body>
+</html>

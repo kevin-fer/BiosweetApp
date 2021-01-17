@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Remove a date</title>
+</head>
+<body>
+
+<a href="index.html">Menu</a>
+
+<h1>Remove a rent</h1>
+
+<form>
+    Plate number: <input id="plateNumberId" type="text" name="plateNumber" value="11AA22"><br>
+    <input type="button" value="Submit" onclick="removeDate()"/>
+</form>
+
+<script>
+function removeDate() {
+
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.open('PUT', "http://localhost:8080/cars/" + document.getElementById("plateNumberId").value + "/back?rent=false", true);
+    httpRequest.setRequestHeader("Content-type", "application/json");
+    httpRequest.send(document);
+}
+</script>
+
+
+
+</body>
+</html>

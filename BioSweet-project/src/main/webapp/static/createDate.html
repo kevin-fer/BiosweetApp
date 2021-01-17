@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Add a date</title>
+</head>
+<body>
+
+<a href="index.html">Menu</a>
+
+<h1>Add a date</h1>
+
+<form>
+    Plate number: <input id="plateNumberId" type="text" name="plateNumber" value="11AA22"><br>
+    Date de début de location: <input id="beginId" type="date" name="begin" value=""><br>
+    Date de fin de location: <input id="endId" type="date" name="end" value=""><br>
+    <input type="button" value="Submit" onclick="addDate()"/>
+</form>
+
+<script>
+function addDate() {
+    var text = '{"';
+    text += 'begin":"' + document.getElementById("beginId").value + '",'
+    text += '"end":"' + document.getElementById("endId").value + '"}'
+
+    var account = JSON.parse(text);
+
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.open('PUT', "http://localhost:8080/cars/" + document.getElementById("plateNumberId").value + "?rent=true", true);
+    httpRequest.setRequestHeader("Content-type", "application/json");
+    httpRequest.send(JSON.stringify(account));
+}
+</script>
+
+
+
+</body>
+</html>
